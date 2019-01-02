@@ -1,0 +1,285 @@
+@import "reset";
+@import "var";
+@import "mixins";
+@import url("https://fonts.googleapis.com/css?family=Advent+Pro|Josefin+Slab|Rajdhani");
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-size: 18px;
+  //font-family: 'Rajdhani', sans-serif;
+  //font-family: 'Josefin Slab', serif;
+  font-family: "Advent Pro", sans-serif;
+  color: $primaryTextColor;
+  background: radial-gradient(circle at top left, $bgColor, #111);
+}
+
+.navbar {
+  position: absolute;
+  z-index: 1;
+  margin-left: -200px;
+  transition: margin 1s;
+
+  ul {
+    list-style: none;
+    align-items: center;
+  }
+  a {
+    display: inline-block;
+    color: $navColor;
+    text-decoration: none;
+    padding: 1em 0.5em;
+    font-weight: 500;
+    //border: 1px solid blue;
+
+    &:hover {
+      color: $navColor-hover;
+      /* background: radial-gradient(
+        circle,
+        darken($showcaseside, 2),
+        $showcaseside
+      );
+      border-radius: 50%;*/
+    }
+  }
+
+  @include media($sm, $xxl) {
+    ul {
+      padding-top: 2em;
+    }
+    a {
+      padding: 1em 2em;
+    }
+  }
+  @include media($lg, $xxl) {
+    a {
+      font-size: 1.3em;
+    }
+  }
+}
+.triangle-left {
+  border-bottom: 100vh solid $showcaseside;
+  border-left: 0px solid transparent;
+  border-right: 100px solid transparent;
+  height: 0;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.triangle-right {
+  position: absolute;
+  border-top: 100vh solid $showcaseside;
+  border-left: 100px solid transparent;
+  border-right: 0 solid transparent;
+  height: 0;
+  width: 50%;
+  top: 0;
+  right: 0;
+}
+.triangle-left,
+.triangle-right {
+  @include media($sm, $md) {
+    width: 35%;
+  }
+  @include media($md, $lg) {
+    width: 30%;
+  }
+  @include media($lg, $xl) {
+    width: 25%;
+  }
+  @include media($xl, $xxl) {
+    width: 20%;
+  }
+}
+
+#showcase {
+  height: 100vh;
+  position: relative;
+  background: radial-gradient(circle at top right, $bgColor, #111);
+}
+
+.container,
+.showcase-container,
+.projects-container {
+  max-width: $md;
+  margin: auto;
+  h1 {
+    text-transform: uppercase;
+    font-size: 1.8em;
+    font-weight: 500;
+    margin-bottom: 1em;
+    line-height: 1.5em;
+  }
+  p {
+    font-size: 1em;
+    font-weight: 500;
+    padding: 0 1em 1em 1em;
+    line-height: 1.5em;
+  }
+}
+.showcase-container {
+  position: relative;
+  top: 35%;
+  left: 0%;
+  text-align: center;
+  color: $navColor;
+
+  @include media($lg, $xxl) {
+    h1 {
+      font-size: 3em;
+    }
+    p {
+      font-size: 2em;
+    }
+  }
+}
+.container {
+  position: relative;
+  text-align: center;
+  color: $navColor;
+  h1 {
+    padding-top: 1.5em;
+  }
+  @include media($lg, $xxl) {
+    p {
+      font-size: 1.3em;
+    }
+  }
+}
+
+#about {
+  // border: 1px solid blue;
+  position: relative;
+  background: radial-gradient(circle at top left, $bgColor, #111);
+
+  min-height: 100vh;
+}
+
+#skills {
+  background: radial-gradient(circle at top right, $bgColor, #111);
+  padding-bottom: 3em;
+  .container {
+    display: grid;
+    grid-auto-rows: minmax(10px, auto);
+    justify-items: center;
+    grid-row-gap: 0.8em;
+  }
+}
+.skill-container {
+  width: 100%;
+  //border: 1px solid green;
+  padding: 0 1em;
+  display: grid;
+  grid-template-columns: 90px 4fr;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    width: 70px;
+    margin: 0;
+    padding: 0 0.5em;
+    font-weight: 600;
+    text-align: left;
+  }
+}
+.skill-bar {
+  height: 2em;
+  background-color: $navColor;
+  border-radius: 10px;
+
+  .skill {
+    z-index: 2;
+    border-radius: 10px;
+    height: 100%;
+    background-color: $showcaseside;
+
+    p {
+      //border: 1px solid blue;
+      margin: auto;
+      padding: 0 0.5em;
+      color: $skillColor;
+    }
+  }
+}
+.skill-animation {
+  animation: loading 2s;
+}
+
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100;
+  }
+}
+
+#projects {
+  background: radial-gradient(circle at top left, $bgColor, #111);
+  padding: 1em 1em;
+
+  @include media($md, $xxl) {
+    .project-container {
+      padding: 0;
+    }
+  }
+  .project-container {
+    box-shadow: 5px 5px 30px darken($showcaseside, 35);
+    padding: 1em;
+    border-radius: 25px;
+    background-color: $showcaseside;
+    margin-bottom: 2em;
+    .preview {
+      border-radius: 15px;
+      margin-bottom: 1em;
+      overflow: hidden;
+      img {
+        width: 100%;
+        margin-bottom: -0.2em;
+        transition: transform 1s;
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  .description {
+    text-align: justify;
+  }
+  .project-link {
+    text-align: center;
+    a {
+      color: $navColor;
+      text-decoration: none;
+      &:hover {
+        color: $navColor-hover;
+      }
+    }
+  }
+}
+#contact {
+  position: relative;
+  background: radial-gradient(circle at top left, $bgColor, #111);
+  a {
+    color: $navColor;
+    text-decoration: none;
+    padding: 0;
+    &:hover {
+      color: $navColor-hover;
+    }
+  }
+  .links {
+    font-size: 2.5em;
+    letter-spacing: 0.2em;
+  }
+}
+
+section {
+  opacity: 0;
+}
+.fadein {
+  transition: opacity 0.8s ease-in;
+  opacity: 1;
+}
